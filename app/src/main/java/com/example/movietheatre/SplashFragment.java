@@ -26,6 +26,8 @@ public class SplashFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        NavHostFragment.findNavController(this).navigate(R.id.mainFragment);
+        NavHostFragment
+                .findNavController(this)
+                .navigate(R.id.mainFragment);
     }
 }
