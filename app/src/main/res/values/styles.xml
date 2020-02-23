@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="MovieTheatreTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorLaunchScreen</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorLaunchScreen</item>
+        <item name="android:statusBarColor">@android:color/black</item>
+    </style>
+
+    <style name="MovieTheatreTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="colorPrimaryDark">@android:color/white</item>
+    </style>
+
+</resources>
