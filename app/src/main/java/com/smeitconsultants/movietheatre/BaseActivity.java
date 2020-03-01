@@ -1,4 +1,4 @@
-package com.example.movietheatre;
+package com.smeitconsultants.movietheatre;
 
 import androidx.appcompat.app.AppCompatActivity;
 

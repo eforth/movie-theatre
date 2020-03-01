@@ -1,4 +1,4 @@
-package com.example.movietheatre;
+package com.smeitconsultants.movietheatre;
 
 import org.junit.Test;
 

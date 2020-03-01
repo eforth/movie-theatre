@@ -1,4 +1,4 @@
-package com.example.movietheatre;
+package com.smeitconsultants.movietheatre;
 
 import android.net.Uri;
 import android.util.Log;
@@ -36,6 +36,8 @@ public class NowShowingAdapter extends
                                  int position) {
 
         final Movie movie = movies.get(position);
+
+        Log.d("movie", Boolean.toString(movie.isShowing()));
 
         if (!movie.isShowing()) return;
 

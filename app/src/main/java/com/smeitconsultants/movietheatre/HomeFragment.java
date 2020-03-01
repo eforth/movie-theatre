@@ -1,4 +1,4 @@
-package com.example.movietheatre;
+package com.smeitconsultants.movietheatre;
 
 
 import android.os.Bundle;
@@ -14,10 +14,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONObject;
 
@@ -25,6 +31,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<Movie> list = new ArrayList<>();
     private NowShowingAdapter nowShowingAdapter;
 
@@ -54,7 +61,7 @@ public class HomeFragment extends Fragment {
         nowShowingRecyclerView.setItemAnimator(new DefaultItemAnimator());
         nowShowingRecyclerView.setAdapter(nowShowingAdapter);
 
-        testMovie2();
+        loadMovies();
 
     }
 
@@ -131,6 +138,41 @@ public class HomeFragment extends Fragment {
         getMovie("tt7713068", true);
         getMovie("tt9285882", true);
         getMovie("tt3794354", false);
+    }
+
+    private void loadMovies() {
+
+        OnCompleteListener<QuerySnapshot> listener = new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (!task.isSuccessful()) { // not successfull
+                    Toast.makeText(getContext(),
+                            "Error retrieving records",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    Toast.makeText(getContext(),
+                            "Records loaded",
+                            Toast.LENGTH_SHORT).show();
+
+                    Movie movie = Movie.fromMap(doc.getData());
+
+                    Log.i("movie", Boolean.toString(movie.isShowing()));
+
+                    if (movie.isShowing()) {
+                        list.add(movie);
+                        nowShowingAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        };
+
+        db.collection("movies")
+                .get()
+                .addOnCompleteListener(listener);
+
     }
 
     private void getMovie(String IMDBID, final boolean showing) {

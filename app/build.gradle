@@ -1,10 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services' // Added for firebase
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "com.example.movietheatre"
+        applicationId "com.smeitconsultants.movietheatre"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
@@ -16,6 +17,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -30,4 +34,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.2.0-alpha05'
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
+
+    // Added for firebase
+    implementation 'com.google.firebase:firebase-analytics:17.2.3'
+    implementation 'com.google.firebase:firebase-firestore:21.4.1'
 }

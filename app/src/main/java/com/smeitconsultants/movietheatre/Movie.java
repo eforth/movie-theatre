@@ -1,8 +1,10 @@
-package com.example.movietheatre;
+package com.smeitconsultants.movietheatre;
 
 import android.graphics.drawable.Drawable;
 
 import org.json.JSONObject;
+
+import java.util.Map;
 
 public class Movie {
 
@@ -137,6 +139,24 @@ public class Movie {
                 obj.optString("imdbRating"),
                 obj.optString("imdbID"),
                 showing
+        );
+    }
+
+    public static Movie fromMap(Map<String, Object> map) {
+
+        if (map == null) return null;
+
+        return new Movie(
+                map.get("title").toString(),
+                null,
+                null,
+                map.get("releasedDate").toString(),
+                map.get("runTime").toString(),
+                map.get("plot").toString(),
+                map.get("poster").toString(),
+                null,
+                null,
+                Boolean.parseBoolean(map.get("isShowing").toString())
         );
     }
 }

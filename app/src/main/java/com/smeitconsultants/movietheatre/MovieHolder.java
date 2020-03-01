@@ -1,7 +1,6 @@
-package com.example.movietheatre;
+package com.smeitconsultants.movietheatre;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
